@@ -31,6 +31,8 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', appRoutes);
+//app.use(app.router);
+//routes.initialize(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
