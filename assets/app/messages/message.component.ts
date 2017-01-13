@@ -24,6 +24,7 @@ import { Message } from "./message.model";
 export class MessageComponent{
 	@Input() message: Message;
 	@Output() editClicked = new EventEmitter<string>();
+	color = 'gray';
 
 	onEdit(){
 		this.editClicked.emit('A new value');
