@@ -10,6 +10,7 @@ var appRoutes = require('./routes/app');
 var messageRoutes = require('./routes/messages');
 
 var app = express();
+mongoose.Promise = global.Promise;
 mongoose.connect('localhost:27017/node-angular');
 
 // view engine setup

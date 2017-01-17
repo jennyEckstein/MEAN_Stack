@@ -17,10 +17,13 @@ import { MessageService } from "./message.service";
 export class MessageListComponent implements OnInit {
 	 messages: Message[];
 
-    constructor(private messageService: MessageService){}
+	constructor(private messageService: MessageService){}
 
-    ngOnInit() {
-    	this.messages = this.messageService.getMessages();
-    	console.log("init");
-    }
+	ngOnInit() {
+		this.messageService.getMessages()
+				.subscribe(
+						(messages: Message[]) => {
+								this.messages = messages;
+						});					
+	}
 }
