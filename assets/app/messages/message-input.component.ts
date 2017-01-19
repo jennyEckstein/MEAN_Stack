@@ -14,12 +14,16 @@ export class MessageInputComponent implements OnInit{
 	constructor(private messageService: MessageService){}
 
 	onSubmit(form: NgForm){
-		//console.log(form);
+		console.log(form);
+		/*if (typeof form === "undefined"){
+			this.message.content = "BIG FAIL";
+		}else{*/
 		if(typeof this.message !== "undefined"){
 			//Edit
 			console.log("Message " + form.value.context);
 			this.message.content = form.value.context;
 			console.log("edit " + this.message);
+			this.message = null;
 		}else{
 
 			const message = new Message(form.value.content, 'Mark');
@@ -29,11 +33,13 @@ export class MessageInputComponent implements OnInit{
 					error => console.error(error)
 				);
 			console.log("save " + this.message);
-		}		
+		}	
+		//}	
 		form.resetForm();
 	}
 
 	onClear(form: NgForm){
+		this.message = null;
 		form.resetForm();
 	}
 
