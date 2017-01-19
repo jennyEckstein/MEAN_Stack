@@ -34,8 +34,8 @@ router.post('/', function(req, res, next){
 		res.status(201).json({
 			message: 'Saved message',
 			obj: result
-		})
-	})
+		});
+	});
 });
 
 module.exports = router;
