@@ -14,27 +14,19 @@ export class MessageInputComponent implements OnInit{
 	constructor(private messageService: MessageService){}
 
 	onSubmit(form: NgForm){
-		console.log(form);
-		/*if (typeof form === "undefined"){
-			this.message.content = "BIG FAIL";
-		}else{*/
-		if(typeof this.message !== "undefined"){
+		if(this.message){
 			//Edit
-			console.log("Message " + form.value.context);
-			this.message.content = form.value.context;
-			console.log("edit " + this.message);
+			this.message.content = form.value.content;
 			this.message = null;
 		}else{
-
-			const message = new Message(form.value.content, 'Mark');
-		this.messageService.addMessage(message)
+			//Create
+			const message = new Message(form.value.content, 'Jenny');
+			this.messageService.addMessage(message)
 			.subscribe(
-					data => console.log(data),
-					error => console.error(error)
+				data => console.log(data),
+				error => console.error(error)
 				);
-			console.log("save " + this.message);
-		}	
-		//}	
+		}
 		form.resetForm();
 	}
 
