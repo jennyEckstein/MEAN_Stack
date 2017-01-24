@@ -11,15 +11,18 @@ export class MessageService{
 	messageIsEdit = new EventEmitter<Message>();
 	constructor(private http: Http){}
 
-	addMessage(message: Message){
-		this.messages.push(message);
+	addMessage(message: Message){		
 		const body = JSON.stringify(message);
-		const headers = new Headers({
-			'Content-Type': 'application/json'
-		});
+		const headers = new Headers({'Content-Type': 'application/json'});
 		return this.http
 			.post('http://localhost:3000/message', body, {headers: headers})
-			.map((response: Response) => response.json())
+			.map((response: Response) => {
+				const result = response.json();
+				console.log("Result ");
+				const message = new Message(result.obj.content, 'Jen', result.obj._id, null);
+				this.messages.push(message);
+				return message;
+			})
 			.catch((error: Response) => Observable.throw(error.json())
 				);	
 	}
@@ -34,7 +37,7 @@ export class MessageService{
 					new Message(
 						message.content,
 						'Dummy', 
-						message.id, 						 
+						message._id, 						 
 						null));
 			}
 			this.messages = transformedMessages;
@@ -52,6 +55,12 @@ export class MessageService{
 	}
 
 	updateMessage(message: Message){
-		
+		const body = JSON.stringify(message);
+		const headers = new Headers({'Content-Type': 'application/json'});
+		console.log("Message " + message);
+		return this.http.patch('http://localhost:3000/message/' + message.messageId, body, {headers: headers})
+			.map((response: Response) => response.json())
+			.catch((error: Response) => Observable.throw(error.json())
+				);	
 	}
 }
