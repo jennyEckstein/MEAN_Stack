@@ -18,7 +18,6 @@ router.get('/', function(req, res, next){
 			});
 		});
 });
-
 //invisibly has /message
 router.post('/', function(req, res, next){
 	var message = new Message({
@@ -37,7 +36,6 @@ router.post('/', function(req, res, next){
 		});
 	});
 });
-
 
 router.patch('/:id', function(req, res, next){
 	console.log("Patching Backend");
@@ -98,4 +96,5 @@ router.delete('/:id', function(req, res, next){
 		});
 	});
 });
+
 module.exports = router;

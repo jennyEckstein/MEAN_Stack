@@ -11,6 +11,14 @@ export class MessageService{
 	messageIsEdit = new EventEmitter<Message>();
 	constructor(private http: Http){}
 
+/*
+	result is coming from Node
+	node has callback function and in case
+	the result is returned depends on the callback result
+	what does map exactly do?
+	map is in the middle
+	subscribe is in the front
+*/
 	addMessage(message: Message){		
 		const body = JSON.stringify(message);
 		const headers = new Headers({'Content-Type': 'application/json'});
@@ -18,7 +26,6 @@ export class MessageService{
 			.post('http://localhost:3000/message', body, {headers: headers})
 			.map((response: Response) => {
 				const result = response.json();
-				console.log("Result ");
 				const message = new Message(result.obj.content, 'Jen', result.obj._id, null);
 				this.messages.push(message);
 				return message;
