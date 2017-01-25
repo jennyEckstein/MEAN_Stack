@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from "@angular/forms";
+import { Router } from "@angular/router";
+import { AuthService } from './auth.service';
+import { User } from "./user.model";
 
 @Component({
 	selector: 'app-signuin',
@@ -9,8 +12,25 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from "@angula
 export class SigninComponent {
 	myForm: FormGroup;
 
+	constructor(
+		private authService: AuthService,
+		private router: Router) {}
+
 	onSubmit(){
-		console.log(this.myForm);
+		console.log("Submit");
+		const user = new User(
+			this.myForm.value.email, 
+			this.myForm.value.password);
+		this.authService.signin(user)
+			.subscribe(
+				data => {
+					console.log("Storing Token");
+					localStorage.setItem('token', data.token);
+					localStorage.setItem('userId', data.userId);
+					this.router.navigateByUrl('/');
+				},
+				error => console.error(error)
+			);
 		this.myForm.reset();
 	}
 
