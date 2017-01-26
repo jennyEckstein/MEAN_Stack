@@ -16,32 +16,28 @@ export class SigninComponent {
 		private authService: AuthService,
 		private router: Router) {}
 
-	onSubmit(){
-		console.log("Submit");
-		const user = new User(
-			this.myForm.value.email, 
-			this.myForm.value.password);
-		this.authService.signin(user)
-			.subscribe(
-				data => {
-					console.log("Storing Token");
-					localStorage.setItem('token', data.token);
-					localStorage.setItem('userId', data.userId);
-					this.router.navigateByUrl('/');
-				},
-				error => console.error(error)
-			);
-		this.myForm.reset();
-	}
+	onSubmit() {
+        const user = new User(this.myForm.value.email, this.myForm.value.password);
+        this.authService.signin(user)
+            .subscribe(
+                data => {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('userId', data.userId);
+                    this.router.navigateByUrl('/');
+                },
+                error => console.error(error)
+            );
+        this.myForm.reset();
+    }
 
-	ngOnInit(){
-		this.myForm = new FormGroup({
-			email: new FormControl(null, [
-					Validators.required//,
-					//Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
-				]),
-			password: new FormControl(null, Validators.required)
 
-		});
-	}
+	ngOnInit() {
+        this.myForm = new FormGroup({
+            email: new FormControl(null, [
+                Validators.required,
+                Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+            ]),
+            password: new FormControl(null, Validators.required)
+        });
+    }
 }
