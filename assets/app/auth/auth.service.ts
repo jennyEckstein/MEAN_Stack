@@ -29,4 +29,8 @@ signin(user: User) {
 	logout(){
 		localStorage.clear();		
 	}
+
+	isLoggedIn(){
+		return localStorage.getItem('token') !== null;
+	}
 }

@@ -1,9 +1,20 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var User = require('./user');
+
 var schema = new Schema({
   content: {type: String, required: true},
   user: {type: Schema.Types.ObjectId, ref: 'User'}
+});
+
+//this is mongoose func that lets you clear 
+//deleted msgs on action 'remove'
+schema.post('remove', function(message){
+	User.findById(message.user, function(err, user){
+		user.messages.pull(message);
+		user.save();
+	});
 });
 
 
