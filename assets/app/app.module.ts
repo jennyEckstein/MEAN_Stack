@@ -14,6 +14,7 @@ import { routing } from "./app.routing";
 import { LogoutComponent } from "./auth/logout.component";
 import { SigninComponent } from "./auth/signin.component";
 import { SignupComponent } from "./auth/signup.component";
+import { ErrorComponent } from "./errors/error.component";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { SignupComponent } from "./auth/signup.component";
         MessagesComponent,
         LogoutComponent,
         SigninComponent,
-        SignupComponent//,
+        SignupComponent,
+        ErrorComponent
         
     ],
     imports: [HttpModule,BrowserModule, FormsModule, routing, ReactiveFormsModule],
