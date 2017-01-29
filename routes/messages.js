@@ -8,6 +8,7 @@ var User = require('../models/user');
 
 router.get('/', function(req, res, next){
 		Message.find()
+		.populate('user', 'firstName') //works like inner join
 		.exec(function(err, messages){
 			if (err){
 				return res.status(500).json({
@@ -21,6 +22,7 @@ router.get('/', function(req, res, next){
 			});
 		});
 });
+
 //invisibly has /message
 router.use('/', function(req, res, next){
 	jwt.verify(req.query.token, 'secret', function(err, decoded){
