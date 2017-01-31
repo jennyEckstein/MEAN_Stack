@@ -9,4 +9,10 @@
 <li>Handled Errors</li>
 </ul>
 
+<p>Authentication</p>
+<span>Users can create a profile. Once profile is created they may log in and leave a message.</span>
 ![Authentication](https://cloud.githubusercontent.com/assets/7528575/22448490/ded4a816-e727-11e6-8ead-c72dcd099fed.PNG)
+<hr>
+<p>Messanger</p>
+<span>Messages are available for public access, but only authenticated user can Edit or Delete their own messages</span>
+![Messanger](https://cloud.githubusercontent.com/assets/7528575/22448491/def12acc-e727-11e6-8b31-f57baffb8744.PNG)
